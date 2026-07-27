@@ -76,7 +76,7 @@
         <span class="mono-label">Automobile & Robotics Engineering — KCT</span>
       </div>
 
-      <h1 class="hero-title fade-up">
+      <h1 class="hero-title fade-up scramble-text" data-text="Designing mechanical hardware for robotics systems.">
         Designing mechanical hardware for robotics systems.
       </h1>
 
@@ -111,7 +111,7 @@
       <div class="about-grid">
         <div class="about-text-column">
           <div class="about-text fade-up">
-            <h2>I build reliable hardware with practical manufacturing in mind.</h2>
+            <h2 class="scramble-text" data-text="I build reliable hardware with practical manufacturing in mind.">I build reliable hardware with practical manufacturing in mind.</h2>
             <p>I am an Automobile Engineering student at Kumaraguru College of Technology. My work focuses on designing mechanical parts, complex mechanism design, and testing autonomous hardware.</p>
           </div>
           
@@ -144,7 +144,7 @@
     <div class="container">
       <div class="section-header fade-up">
         <span class="mono-label">02 / PROJECT SHOWCASE</span>
-        <h2>Engineering Projects</h2>
+        <h2 class="scramble-text" data-text="Engineering Projects">Engineering Projects</h2>
         <p class="section-subtext">Click any project to open its dedicated view and full technical details.</p>
       </div>
 
@@ -218,7 +218,7 @@
     <div class="container">
       <div class="section-header fade-up">
         <span class="mono-label">03 / UPCOMING ENDEAVORS</span>
-        <h2>Future Projects</h2>
+        <h2 class="scramble-text" data-text="Future Projects">Future Projects</h2>
       </div>
       <div class="linear-card project-card fade-up">
         <div class="card-header">
@@ -320,7 +320,7 @@
   <footer class="footer fade-up">
     <div class="container">
       <div class="footer-box">
-        <h2>Ready to build reliable hardware?</h2>
+        <h2 class="scramble-text" data-text="Ready to build reliable hardware?">Ready to build reliable hardware?</h2>
         <p>I am available for robotics design roles, mechanical engineering positions, and technical projects.</p>
         <div class="footer-actions">
           <a href="mailto:nithesh.23au@kct.ac.in" class="btn btn-primary" onclick="triggerRedirect(event, 'mailto:nithesh.23au@kct.ac.in', 'Email Client', false)">nithesh.23au@kct.ac.in</a>
@@ -364,7 +364,6 @@
           <p>Engineered a tactical dual-robot system designed to automate basketball passing and shooting operations under strict competition size and weight limits. The system combined a high-speed agile feeder robot with a heavy-duty precision shooter robot to achieve seamless court coverage and high-accuracy scoring.</p>
         </div>
 
-        <!-- Expanded 2025 Media Grid -->
         <div class="overlay-media-grid">
           <div class="media-box full-width">
             <img src="robocon2025-dual-bots.png" alt="Robocon 2025 Dual Bots" class="overlay-img" />
@@ -482,14 +481,10 @@
           </div>
         </div>
 
-        <!-- Custom Wheel Design Video Demonstration -->
         <div class="overlay-media-grid">
           <div class="media-box full-width">
-            <video controls class="overlay-video" poster="robocon2026-autonomous-tracked.png">
-              <source src="robocon2026-wheel-design.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-            <span class="media-caption">Real-world track drive test: TPU shoes & PETG drive wheels navigating obstacles</span>
+            <iframe src="https://drive.google.com/file/d/1VcSyVgkPiX7-yo4k1EuNGwIHd7qqrFd6/preview" class="overlay-video" style="border: none;" allow="autoplay" allowfullscreen></iframe>
+            <span class="media-caption">🎥 Mechanical demonstration: PETG drive wheel & custom TPU track shoe assembly in motion</span>
           </div>
         </div>
 
@@ -506,14 +501,13 @@
           </ul>
         </div>
 
-        <!-- Real-World Track Test Video -->
         <div class="overlay-media-grid">
           <div class="media-box full-width">
             <video controls class="overlay-video" poster="robocon2026-dual-system.png">
               <source src="robocon2026-track-test.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
-            <span class="media-caption">Mechanical demonstration: PETG drive wheel & custom TPU track shoe assembly in motion</span>
+            <span class="media-caption">🎥 Real-world track drive test: TPU shoes & PETG drive wheels navigating obstacles</span>
           </div>
         </div>
 
@@ -579,7 +573,6 @@
           </div>
         </div>
 
-        <!-- Footwear Industry Spraying Prototype Video -->
         <div class="overlay-media-grid">
           <div class="media-box full-width">
             <video controls class="overlay-video" poster="6dof-hero-render.png">
@@ -627,7 +620,6 @@
           <p>Designed and prototyped a fully customized, 3D-printed BB-8 inspired robot from scratch for an enterprise office project. The primary challenge was engineering a functional, interactive droid that integrated reliable locomotion with custom mechanical features—including payload delivery and audio systems—all optimized for large-scale 3D printing.</p>
         </div>
 
-        <!-- Larger Hero Media Layout for BB8 -->
         <div class="overlay-media-grid">
           <div class="media-box full-width hero-media-large">
             <img src="bb8-hero.png" alt="BB8 Bot Hero" class="overlay-img hero-img-large" />
@@ -635,7 +627,6 @@
           </div>
         </div>
 
-        <!-- Video Demonstration for BB8 Prototype -->
         <div class="overlay-media-grid">
           <div class="media-box full-width">
             <video controls class="overlay-video" poster="bb8-hero.png">
@@ -673,6 +664,14 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- NEW LIGHTBOX MODAL -->
+  <div id="lightbox-modal" class="lightbox-modal" onclick="closeLightbox(event)">
+    <span class="lightbox-close" onclick="closeLightbox(event)">✕</span>
+    <div class="lightbox-content-wrapper">
+      <!-- Image/Video gets injected here via Javascript -->
     </div>
   </div>
 
