@@ -69,91 +69,36 @@ if (!isMobileDevice) {
 }
 
 /* =========================================================
-   TEXT SCRAMBLE DECODE EFFECT
+   SCROLL REVEAL (Clean Fade Up)
 ========================================================= */
-class TextScramble {
-  constructor(el) {
-    this.el = el;
-    this.chars = '!<>-_\\/[]{}—=+*^?#________';
-    this.update = this.update.bind(this);
-  }
-  
-  setText(newText) {
-    const oldText = this.el.innerText;
-    const length = Math.max(oldText.length, newText.length);
-    const promise = new Promise((resolve) => this.resolve = resolve);
-    this.queue = [];
-    for (let i = 0; i < length; i++) {
-      const from = oldText[i] || '';
-      const to = newText[i] || '';
-      const start = Math.floor(Math.random() * 40);
-      const end = start + Math.floor(Math.random() * 40);
-      this.queue.push({ from, to, start, end, char: '' });
-    }
-    cancelAnimationFrame(this.frameRequest);
-    this.frame = 0;
-    this.update();
-    return promise;
-  }
-  
-  update() {
-    let output = '';
-    let complete = 0;
-    for (let i = 0, n = this.queue.length; i < n; i++) {
-      let { from, to, start, end, char } = this.queue[i];
-      if (this.frame >= end) {
-        complete++;
-        output += to;
-      } else if (this.frame >= start) {
-        if (!char || Math.random() < 0.28) {
-          char = this.randomChar();
-          this.queue[i].char = char;
-        }
-        output += `<span class="dud">${char}</span>`;
-      } else {
-        output += from;
-      }
-    }
-    this.el.innerHTML = output;
-    if (complete === this.queue.length) {
-      this.resolve();
-    } else {
-      this.frameRequest = requestAnimationFrame(this.update);
-      this.frame++;
-    }
-  }
-  
-  randomChar() {
-    return this.chars[Math.floor(Math.random() * this.chars.length)];
-  }
-}
-
 const fadeUpObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
-      if (entry.target.classList.contains('scramble-text') && !entry.target.classList.contains('scrambled')) {
-        const fx = new TextScramble(entry.target);
-        const originalText = entry.target.getAttribute('data-text');
-        fx.setText(originalText);
-        entry.target.classList.add('scrambled'); 
-      }
     } else {
       entry.target.classList.remove('visible');
     }
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-document.querySelectorAll('.fade-up, .scramble-text').forEach((el) => fadeUpObserver.observe(el));
+document.querySelectorAll('.fade-up').forEach((el) => fadeUpObserver.observe(el));
 
-/* Smooth CAD Background Switcher */
+/* =========================================================
+   CAD BACKGROUND SWITCHER
+========================================================= */
 const cadObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       const targetCadId = entry.target.getAttribute('data-cad');
-      document.querySelectorAll('.cad-bg-img').forEach(img => img.classList.remove('active'));
+      
+      document.querySelectorAll('.cad-bg-img').forEach(img => {
+        img.classList.remove('active');
+      });
+
       const activeCadImg = document.getElementById(targetCadId);
-      if (activeCadImg) activeCadImg.classList.add('active');
+      if (activeCadImg) {
+        activeCadImg.classList.add('active');
+      }
     }
   });
 }, { threshold: 0.35 });
@@ -233,7 +178,6 @@ function openLightbox(element) {
       }
     });
 
-    // Handle touch pinch/zoom gestures for mobile optionally
     wrapper.appendChild(img);
   } else if (element.tagName === 'VIDEO') {
     const video = document.createElement('video');
@@ -242,6 +186,7 @@ function openLightbox(element) {
     video.autoplay = true;
     wrapper.appendChild(video);
   } else {
+      // If it is an iframe (Google Drive), don't trigger the lightbox 
       return; 
   }
 
@@ -253,7 +198,7 @@ function closeLightbox(e) {
     const lightbox = document.getElementById('lightbox-modal');
     lightbox.classList.remove('active');
     const wrapper = lightbox.querySelector('.lightbox-content-wrapper');
-    wrapper.innerHTML = ''; 
+    wrapper.innerHTML = ''; // Stops the video instantly
   }
 }
 
@@ -265,7 +210,9 @@ document.querySelectorAll('.overlay-img, .overlay-video').forEach(media => {
   }
 });
 
-/* Project Overlay Popup Control */
+/* =========================================================
+   PROJECT OVERLAY POPUP CONTROL
+========================================================= */
 function openProjectView(projectId) {
   const overlay = document.getElementById(projectId);
   if (overlay) {
@@ -295,16 +242,19 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-/* Resume Download Notification Toast */
+/* =========================================================
+   UTILITIES (Toasts & Redirects)
+========================================================= */
 function triggerResumeDownload(e) {
   const toast = document.getElementById('toast');
   if (toast) {
     toast.classList.add('active');
-    setTimeout(() => toast.classList.remove('active'), 3000);
+    setTimeout(() => {
+      toast.classList.remove('active');
+    }, 3000);
   }
 }
 
-/* Interstitial Redirect Modal */
 function triggerRedirect(e, url, destinationName, isNewTab = true) {
   e.preventDefault();
   const modal = document.getElementById('redirect-modal');
@@ -318,8 +268,11 @@ function triggerRedirect(e, url, destinationName, isNewTab = true) {
 
     setTimeout(() => {
       modal.classList.remove('active');
-      if (isNewTab) window.open(url, '_blank');
-      else window.location.href = url;
+      if (isNewTab) {
+        window.open(url, '_blank');
+      } else {
+        window.location.href = url;
+      }
     }, 2000);
   }
 }
