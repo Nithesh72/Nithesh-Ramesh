@@ -141,8 +141,7 @@ body.cursor-hover .cursor-outline {
 .hero-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); padding: 8px 16px; border-radius: 30px; margin-bottom: 24px; }
 .pill-dot { width: 6px; height: 6px; background: var(--text-primary); border-radius: 50%; }
 
-.hero-title, h2.scramble-text { background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: transparent; }
-.hero-title { font-size: 3.4rem; font-weight: 700; line-height: 1.15; max-width: 850px; margin-bottom: 20px; }
+.hero-title { background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; color: transparent; font-size: 3.4rem; font-weight: 700; line-height: 1.15; max-width: 850px; margin-bottom: 20px; }
 .hero-description { font-size: 1.15rem; color: var(--text-secondary); max-width: 650px; margin-bottom: 40px; font-weight: 400; }
 
 .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; border-top: 1px solid var(--border-subtle); padding-top: 32px; }
@@ -244,8 +243,6 @@ body.cursor-hover .cursor-outline {
 
 .overlay-img:hover, video.overlay-video:hover { filter: brightness(1.15); transform: scale(1.01); }
 .media-caption { display: block; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); margin-top: 10px; text-align: center; }
-
-.dud { color: var(--text-muted); opacity: 0.7; }
 
 .media-box.hero-media-large { padding: 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-highlight); }
 .overlay-img.hero-img-large { height: 480px; object-fit: cover; border-radius: 16px; }
