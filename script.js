@@ -69,19 +69,86 @@ if (!isMobileDevice) {
 }
 
 /* =========================================================
-   SCROLL REVEAL (Clean Fade Up)
+   TEXT SCRAMBLE DECODE EFFECT (Fast & Smooth Version)
 ========================================================= */
+class TextScramble {
+  constructor(el) {
+    this.el = el;
+    this.chars = '!<>-_\\/[]{}—=+*^?#________';
+    this.update = this.update.bind(this);
+  }
+  
+  setText(newText) {
+    const oldText = this.el.innerText;
+    const length = Math.max(oldText.length, newText.length);
+    const promise = new Promise((resolve) => this.resolve = resolve);
+    this.queue = [];
+    for (let i = 0; i < length; i++) {
+      const from = oldText[i] || '';
+      const to = newText[i] || '';
+      // Dramatically reduced timings for a lightning-fast snap effect
+      const start = Math.floor(Math.random() * 5);
+      const end = start + Math.floor(Math.random() * 15);
+      this.queue.push({ from, to, start, end, char: '' });
+    }
+    cancelAnimationFrame(this.frameRequest);
+    this.frame = 0;
+    this.update();
+    return promise;
+  }
+  
+  update() {
+    let output = '';
+    let complete = 0;
+    for (let i = 0, n = this.queue.length; i < n; i++) {
+      let { from, to, start, end, char } = this.queue[i];
+      if (this.frame >= end) {
+        complete++;
+        output += to;
+      } else if (this.frame >= start) {
+        // Increased update frequency to 60% for smoother letter cycling
+        if (!char || Math.random() < 0.60) {
+          char = this.randomChar();
+          this.queue[i].char = char;
+        }
+        output += `<span class="dud">${char}</span>`;
+      } else {
+        output += from;
+      }
+    }
+    this.el.innerHTML = output;
+    if (complete === this.queue.length) {
+      this.resolve();
+    } else {
+      this.frameRequest = requestAnimationFrame(this.update);
+      this.frame++;
+    }
+  }
+  
+  randomChar() {
+    return this.chars[Math.floor(Math.random() * this.chars.length)];
+  }
+}
+
 const fadeUpObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
+      
+      // Trigger fast scramble
+      if (entry.target.classList.contains('scramble-text') && !entry.target.classList.contains('scrambled')) {
+        const fx = new TextScramble(entry.target);
+        const originalText = entry.target.getAttribute('data-text');
+        fx.setText(originalText);
+        entry.target.classList.add('scrambled'); 
+      }
     } else {
       entry.target.classList.remove('visible');
     }
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-document.querySelectorAll('.fade-up').forEach((el) => fadeUpObserver.observe(el));
+document.querySelectorAll('.fade-up, .scramble-text').forEach((el) => fadeUpObserver.observe(el));
 
 /* =========================================================
    CAD BACKGROUND SWITCHER
@@ -120,7 +187,6 @@ function openLightbox(element) {
   const wrapper = lightbox.querySelector('.lightbox-content-wrapper');
   wrapper.innerHTML = ''; 
 
-  // Pause videos in background
   document.querySelectorAll('.overlay-video').forEach(v => {
       if(v.pause) v.pause();
   });
@@ -130,20 +196,18 @@ function openLightbox(element) {
     img.src = element.src;
     img.classList.add('zoomable-img');
 
-    // Reset Zoom/Pan variables
     lbScale = 1; lbPointX = 0; lbPointY = 0;
     img.style.transform = `translate(0px, 0px) scale(1)`;
     
-    // Mouse Wheel to Zoom
     img.addEventListener('wheel', (e) => {
       e.preventDefault();
       const zoomSensitivity = 0.15;
       const delta = e.deltaY < 0 ? 1 : -1;
-      const newScale = Math.min(Math.max(1, lbScale + (delta * zoomSensitivity * lbScale)), 5); // Max 5x Zoom
+      const newScale = Math.min(Math.max(1, lbScale + (delta * zoomSensitivity * lbScale)), 5);
 
       lbScale = newScale;
       if (lbScale === 1) {
-        lbPointX = 0; lbPointY = 0; // Snap back to center
+        lbPointX = 0; lbPointY = 0; 
         img.classList.remove('zoomed');
       } else {
         img.classList.add('zoomed');
@@ -152,7 +216,6 @@ function openLightbox(element) {
       img.style.transform = `translate(${lbPointX}px, ${lbPointY}px) scale(${lbScale})`;
     });
 
-    // Click & Drag to Pan
     img.addEventListener('mousedown', (e) => {
       if (lbScale > 1) {
         e.preventDefault();
@@ -186,7 +249,6 @@ function openLightbox(element) {
     video.autoplay = true;
     wrapper.appendChild(video);
   } else {
-      // If it is an iframe (Google Drive), don't trigger the lightbox 
       return; 
   }
 
@@ -198,7 +260,7 @@ function closeLightbox(e) {
     const lightbox = document.getElementById('lightbox-modal');
     lightbox.classList.remove('active');
     const wrapper = lightbox.querySelector('.lightbox-content-wrapper');
-    wrapper.innerHTML = ''; // Stops the video instantly
+    wrapper.innerHTML = ''; 
   }
 }
 
