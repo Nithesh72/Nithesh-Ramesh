@@ -3,298 +3,678 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nithesh Ramesh | Engineering Portfolio</title>
+  <title>Nithesh Ramesh — Mechanical & Robotics Systems Engineer</title>
   <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600&family=Noto+Sans+Tamil:wght@500&family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <!-- Custom Cursor -->
-  <div class="cursor-dot" id="cursor-dot"></div>
-  <div class="cursor-outline" id="cursor-outline"></div>
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
 
-  <!-- Ambient Background Orbs -->
+  <!-- Slow-Moving Ambient Glow Background -->
   <div class="gemini-bg">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
   </div>
 
-  <!-- Navigation Bar -->
-  <nav class="navbar">
+  <!-- Floating CAD Models Background Layer -->
+  <div class="cad-bg-wrapper">
+    <img src="cad-hero.png" id="cad-img-hero" class="cad-bg-img cad-right active" alt="CAD Hero">
+    <img src="cad-about.png" id="cad-img-about" class="cad-bg-img cad-left" alt="CAD About">
+    <img src="cad-projects.png" id="cad-img-projects" class="cad-bg-img cad-right" alt="CAD Projects">
+    <img src="cad-experience.png" id="cad-img-experience" class="cad-bg-img cad-left" alt="CAD Experience">
+    <img src="cad-skills.png" id="cad-img-skills" class="cad-bg-img cad-right" alt="CAD Skills">
+  </div>
+
+  <!-- Download Toast Notification -->
+  <div id="toast" class="toast-popup">
+    <span class="toast-icon">✓</span>
+    <span id="toast-message">Resume Downloaded Successfully!</span>
+  </div>
+
+  <!-- External Redirect Modal -->
+  <div id="redirect-modal" class="redirect-modal">
+    <div class="redirect-card">
+      <div class="redirect-spinner"></div>
+      <h3 id="redirect-title">Connecting...</h3>
+      <p id="redirect-desc">Opening external link in a moment...</p>
+    </div>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="navbar" id="navbar">
     <div class="nav-container">
       <a href="#" class="brand-logo">
-        <span class="logo-badge">N</span> 
-        <span class="logo-name">Nithesh Ramesh</span>
+        <span class="logo-badge">N</span>
+        <span class="logo-text">Nithesh Ramesh</span>
       </a>
-      <a href="#projects" class="btn btn-secondary">View Work</a>
+
+      <nav class="nav-menu">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#skills" class="nav-link">Skills</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="mailto:nithesh.23au@kct.ac.in" class="btn btn-secondary" onclick="triggerRedirect(event, 'mailto:nithesh.23au@kct.ac.in', 'Email Client', false)">Contact</a>
+        <a href="Nithesh_Ramesh_Robotics_Design_Resume.docx" download class="btn btn-primary" onclick="triggerResumeDownload(event)">Resume ↓</a>
+      </div>
     </div>
-  </nav>
+  </header>
 
   <!-- Hero Section -->
-  <section class="hero-section container">
-    <div class="hero-pill glow-bg">
-      <div class="pill-dot"></div>
-      Automobile & Robotics Engineering — KCT
-    </div>
-    
-    <h1 class="hero-title">Designing mechanical hardware for robotics systems.</h1>
-    <p class="hero-description">Focused on 3D CAD modeling, Product design, custom manufacturing, and building autonomous mechanical systems.</p>
-    
-    <div class="hero-stats">
-      <div class="stat-box">
-        <span class="stat-number">8.2</span>
-        <span class="stat-label">CGPA</span>
+  <section class="hero-section cad-trigger" data-cad="cad-img-hero">
+    <div class="container">
+      <div class="hero-pill glow-effect fade-up">
+        <span class="pill-dot"></span>
+        <span class="mono-label">Automobile & Robotics Engineering — KCT</span>
       </div>
-      <div class="stat-box">
-        <span class="stat-number">NCC</span>
-        <span class="stat-label">Cadet</span>
-      </div>
-      <div class="stat-box">
-        <span class="stat-number">2+</span>
-        <span class="stat-label">Years CAD Experience</span>
+
+      <h1 class="hero-title fade-up">
+        Designing mechanical hardware for robotics systems.
+      </h1>
+
+      <p class="hero-description fade-up">
+        Focused on 3D CAD modeling, product design, custom manufacturing, and building autonomous mechanical systems.
+      </p>
+
+      <div class="hero-stats fade-up">
+        <div class="stat-card">
+          <span class="stat-number">8.2</span>
+          <span class="stat-label">Academic CGPA</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">NCC Cadet</span>
+          <span class="stat-label">Active Service</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">2+ Years</span>
+          <span class="stat-label">CAD Experience</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- About & Experience Section -->
-  <section class="section container">
-    <div class="about-grid">
-      <!-- Left Column: Bio & Education -->
-      <div class="about-text">
-        <h2>I build reliable hardware with practical manufacturing in mind.</h2>
-        <p class="about-desc">I am an Automobile Engineering student at Kumaraguru College of Technology. My work focuses on designing mechanical parts, complex mechanism designing, and testing autonomous hardware.</p>
-        
-        <h3 class="subsection-title">Education</h3>
-        <div class="info-card">
-          <h3>B.E. Automobile Engineering</h3>
-          <span class="info-meta">2023 – 2027 • Kumaraguru College of Technology</span>
-          <ul class="role-bullets">
-            <li>3 consecutive years of Merit scholarship</li>
-            <li>NCC cadet 3 years, built through hard times</li>
-          </ul>
-        </div>
+  <!-- About Section -->
+  <section id="about" class="section cad-trigger" data-cad="cad-img-about">
+    <div class="container">
+      <div class="section-badge fade-up">
+        <span class="mono-label">01 / ABOUT ME</span>
       </div>
 
-      <!-- Right Column: Track Records & Roles -->
-      <div class="experience-timeline">
-        <h3 class="subsection-title">Experience & Track Record</h3>
-        
-        <div class="info-card">
-          <h3>Robotics Design Engineer</h3>
-          <span class="info-meta">2 Years • iQube Innovation Centre (KCT)</span>
-          <p>Lead mechanical design and rapid prototyping for various in-house robotics projects.</p>
+      <div class="about-grid">
+        <div class="about-text-column">
+          <div class="about-text fade-up">
+            <h2>I build reliable hardware with practical manufacturing in mind.</h2>
+            <p>I am an Automobile Engineering student at Kumaraguru College of Technology. My work focuses on designing mechanical parts, complex mechanism design, and testing autonomous hardware.</p>
+          </div>
+          
+          <div class="info-card fade-up" style="margin-top: 32px;">
+            <h3>Robotics Design Engineer</h3>
+            <span class="info-meta">iQube Innovation Center of KCT</span>
+            <p>Robotics Design Engineer for 2 years, building custom systems, kinematic models, and automation mechanisms.</p>
+          </div>
         </div>
 
-        <div class="info-card">
-          <h3>Vice President — NCC Airwing</h3>
-          <span class="info-meta">2025 – 2026 • National Cadet Corps</span>
-          <p>My NCC Journey: Developed leadership, discipline, and resilience leading cadet operations and managing team dynamics through rigorous situations.</p>
+        <div class="about-cards fade-up">
+          <div class="info-card">
+            <h3>B.E. Automobile Engineering</h3>
+            <span class="info-meta">2023 – 2027 • Kumaraguru College of Technology</span>
+            <p>Awarded Merit Scholarship for 3 consecutive years.<br>Served as an NCC Cadet for 3 years, building resilience and leadership through rigorous training.</p>
+          </div>
+
+          <div class="info-card">
+            <h3>Vice President — NCC Airwing</h3>
+            <span class="info-meta">2025 – 2026 • National Cadet Corps</span>
+            <p>Holder of the NCC 'C' Certificate. Led squad operations and managed student activities.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section cad-trigger" data-cad="cad-img-projects">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="mono-label">02 / PROJECT SHOWCASE</span>
+        <h2>Engineering Projects</h2>
+        <p class="section-subtext">Click any project to open its dedicated view and full technical details.</p>
+      </div>
+
+      <div class="projects-grid">
+        <div class="linear-card project-card fade-up" onclick="openProjectView('project-robocon2025')">
+          <div class="card-image-wrapper">
+            <img src="robocon2025-dual-bots.png" alt="Robocon 2025" class="card-image" />
+            <div class="image-overlay-gradient"></div>
+          </div>
+          <div class="card-header">
+            <span class="card-tag">DUAL ROBOT SYSTEM</span>
+          </div>
+          <h3 class="card-title">Robocon 2025</h3>
+          <p class="card-desc">Dual vision-guided basketball feeder & turret shooter robots engineered for ABU Robocon.</p>
+          <div class="card-footer">
+            <span class="card-link">Explore Case View →</span>
+          </div>
+        </div>
+
+        <div class="linear-card project-card fade-up" onclick="openProjectView('project-robocon2026')">
+          <div class="card-image-wrapper">
+            <img src="robocon2026-dual-system.png" alt="Robocon 2026" class="card-image" />
+            <div class="image-overlay-gradient"></div>
+          </div>
+          <div class="card-header">
+            <span class="card-tag">AUTONOMOUS & MANUAL</span>
+          </div>
+          <h3 class="card-title">Robocon 2026</h3>
+          <p class="card-desc">Autonomous tracked XO robot & manual 4-wheel mobile platform built with TPU custom treads.</p>
+          <div class="card-footer">
+            <span class="card-link">Explore Case View →</span>
+          </div>
+        </div>
+
+        <div class="linear-card project-card fade-up" onclick="openProjectView('project-6dof')">
+          <div class="card-image-wrapper">
+            <img src="6dof-hero-render.png" alt="6 DOF Robotic Arm" class="card-image" />
+            <div class="image-overlay-gradient"></div>
+          </div>
+          <div class="card-header">
+            <span class="card-tag">INDUSTRIAL AUTOMATION</span>
+          </div>
+          <h3 class="card-title">6-DOF Robotic Arm</h3>
+          <p class="card-desc">6-axis articulated arm designed for automated adhesive and paint spraying in shoe manufacturing.</p>
+          <div class="card-footer">
+            <span class="card-link">Explore Case View →</span>
+          </div>
+        </div>
+
+        <div class="linear-card project-card fade-up" onclick="openProjectView('project-bb8')">
+          <div class="card-image-wrapper">
+            <img src="bb8-hero.png" alt="BB8 Inspired Bot" class="card-image" />
+            <div class="image-overlay-gradient"></div>
+          </div>
+          <div class="card-header">
+            <span class="card-tag">ENTERPRISE INTERACTIVE BOT</span>
+          </div>
+          <h3 class="card-title">BB8 Inspired Droid</h3>
+          <p class="card-desc">Customized interactive office droid featuring a Waffle Pi base, motorized belly drawer, and head audio.</p>
+          <div class="card-footer">
+            <span class="card-link">Explore Case View →</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  
+  <!-- Upcoming Endeavors Section -->
+  <section id="futured-projects" class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="mono-label">03 / UPCOMING ENDEAVORS</span>
+        <h2>Future Projects</h2>
+      </div>
+      <div class="linear-card project-card fade-up">
+        <div class="card-header">
+          <span class="card-tag">FINAL YEAR PROJECT</span>
+        </div>
+        <h3 class="card-title">Amphibious Vehicle Design</h3>
+        <p class="card-desc">Designing an amphibious vehicle for Ampere as part of my final year engineering project.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="section cad-trigger" data-cad="cad-img-experience">
+    <div class="container">
+      <div class="section-badge fade-up">
+        <span class="mono-label">04 / TRACK RECORD</span>
+      </div>
+
+      <div class="experience-timeline">
+        <div class="timeline-item fade-up">
+          <div class="timeline-meta">
+            <span class="timeline-date">2023 — PRESENT</span>
+            <span class="timeline-org">National Cadet Corps</span>
+          </div>
+          <div class="timeline-body">
+            <h3>NCC Journey</h3>
+            <p class="role-desc">Three years of dedicated service, navigating through difficult challenges and developing strong leadership and tactical skills.</p>
+          </div>
+        </div>
+      
+        <div class="timeline-item fade-up">
+          <div class="timeline-meta">
+            <span class="timeline-date">2024 — PRESENT</span>
+            <span class="timeline-org">iQube Innovation Center</span>
+          </div>
+          <div class="timeline-body">
+            <h3>Robotics Design Engineer</h3>
+            <p class="role-desc">Designing custom robotic mechanisms and automation systems for industrial and academic projects.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-up">
+          <div class="timeline-meta">
+            <span class="timeline-date">2025 — 2026</span>
+            <span class="timeline-org">DD Robocon Team</span>
+          </div>
+          <div class="timeline-body">
+            <h3>Mechanical Design Lead</h3>
+            <p class="role-desc">Led the mechanical design, CAD modeling, and hardware fabrication for the Robocon 2026 robotics contest.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Skills Section -->
-  <section class="section container">
-    <div class="section-header">
-      <span class="mono-label">CAPABILITIES</span>
-      <h2>Skill Set</h2>
-    </div>
-    <div class="skills-grid">
-      <div class="skill-card">
-        <h3>Core Engineering</h3>
-        <ul class="skill-list">
-          <li>Product Design</li>
-          <li>Complex Mechanism Design</li>
-          <li>Inverse Kinematics</li>
-          <li>Topology Optimization (Simulation)</li>
-        </ul>
-      </div>
-      <div class="skill-card">
-        <h3>Manufacturing</h3>
-        <ul class="skill-list">
-          <li>Material Selection for 3D Printing (ABS, PETG, TPU, PLA)</li>
-          <li>Custom Fabrication</li>
-          <li>Rapid Prototyping</li>
-        </ul>
-      </div>
-      <div class="skill-card">
-        <h3>Software & Tools</h3>
-        <ul class="skill-list">
-          <li>Fusion 360 (Advanced)</li>
-          <li>SolidWorks</li>
-          <li>CAD Animation & Rendering</li>
-          <li>Learning ROS</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Final Year Project -->
-  <section class="section container">
-    <div class="section-header">
-      <span class="mono-label">FINAL YEAR THESIS</span>
-      <h2>Featured Project</h2>
-    </div>
-    <div class="linear-card featured-card">
-      <div class="featured-content">
-        <span class="card-tag featured-tag">Ampere Company</span>
-        <h3 class="featured-title">Amphibious Vehicle Design</h3>
-        <p class="card-desc">My final year engineering project. Designing a versatile vehicle capable of operating flawlessly on both land and water surfaces, focusing on buoyancy mechanisms, specialized propulsion, and waterproof chassis integration.</p>
-      </div>
-      <div class="featured-image-placeholder">
-        [ Add Amphibious Vehicle Render Here ]
-      </div>
-    </div>
-  </section>
-
-  <!-- Main Engineering Projects Grid -->
-  <section id="projects" class="section container">
-    <div class="section-header">
-      <span class="mono-label">PORTFOLIO</span>
-      <h2>Engineering Projects</h2>
-    </div>
-
-    <div class="projects-grid">
-      <!-- Project 1: Robocon 2025 -->
-      <div class="linear-card project-card" data-target="modal-robocon-2025">
-        <div class="card-image-wrapper"><img src="images/robocon25-main.jpg" alt="Robocon 2025" class="card-image"></div>
-        <div class="card-header"><span class="card-tag">Competition Robot</span></div>
-        <h3 class="card-title">Robocon 2025</h3>
-        <p class="card-desc">Advanced custom robotic system designed for dynamic competition tasks.</p>
-        <span class="card-link">View Case Study →</span>
+  <section id="skills" class="section cad-trigger" data-cad="cad-img-skills">
+    <div class="container">
+      <div class="section-badge fade-up">
+        <span class="mono-label">05 / SKILLS & TOOLKIT</span>
       </div>
 
-      <!-- Project 2: Robocon 2026 -->
-      <div class="linear-card project-card" data-target="modal-robocon-2026">
-        <div class="card-image-wrapper"><img src="images/robocon26-main.jpg" alt="Robocon 2026" class="card-image"></div>
-        <div class="card-header"><span class="card-tag">Competition Robot</span></div>
-        <h3 class="card-title">Robocon 2026</h3>
-        <p class="card-desc">Next-generation autonomous system focusing on speed and precision.</p>
-        <span class="card-link">View Case Study →</span>
-      </div>
+      <div class="skills-grid">
+        <div class="linear-card skill-card fade-up">
+          <h3>3D CAD & Modeling</h3>
+          <ul class="skill-list">
+            <li>Fusion 360 (Advanced)</li>
+            <li>SolidWorks</li>
+            <li>3D Animation</li>
+            <li>Product Rendering</li>
+            <li>Learning ROS</li>
+          </ul>
+        </div>
 
-      <!-- Project 3: 6 DOF Robotic Arm -->
-      <div class="linear-card project-card" data-target="modal-arm">
-        <div class="card-image-wrapper"><img src="images/arm-main.jpg" alt="6 DOF Arm" class="card-image"></div>
-        <div class="card-header"><span class="card-tag">Mechanism Design</span></div>
-        <h3 class="card-title">6-DOF Robotic Arm</h3>
-        <p class="card-desc">High-torque precision robotic arm with inverse kinematics and custom gearboxes.</p>
-        <span class="card-link">View Case Study →</span>
-      </div>
+        <div class="linear-card skill-card fade-up">
+          <h3>Manufacturing & Fabrication</h3>
+          <ul class="skill-list">
+            <li>3D Printing (FDM / SLA)</li>
+            <li>Material Selection (ABS, PETG, TPU, PLA)</li>
+            <li>Design for Manufacturing (DFM)</li>
+            <li>Carbon Fiber Layups</li>
+          </ul>
+        </div>
 
-      <!-- Project 4: BB8 Inspired Bot -->
-      <div class="linear-card project-card" data-target="modal-bb8">
-        <div class="card-image-wrapper"><img src="images/bb8-main.jpg" alt="BB8 Bot" class="card-image"></div>
-        <div class="card-header"><span class="card-tag">Autonomous Mobility</span></div>
-        <h3 class="card-title">BB8 Inspired Bot</h3>
-        <p class="card-desc">Spherical holonomic drive robot inspired by Star Wars, utilizing internal pendulums.</p>
-        <span class="card-link">View Case Study →</span>
+        <div class="linear-card skill-card fade-up">
+          <h3>Analysis & Testing</h3>
+          <ul class="skill-list">
+            <li>MATLAB & Simulink</li>
+            <li>Inverse Kinematics</li>
+            <li>Topology Optimization via Simulation</li>
+            <li>Hardware Assembly & Testing</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="footer container">
-    <div class="footer-box">
-      <h2>Let's build something.</h2>
-      <p>I am available for robotics design roles, mechanical works and technical projects.</p>
-      <a href="mailto:your-email@example.com" class="btn btn-primary">Get in Touch</a>
+  <footer class="footer fade-up">
+    <div class="container">
+      <div class="footer-box">
+        <h2>Ready to build reliable hardware?</h2>
+        <p>I am available for robotics design roles, mechanical engineering positions, and technical projects.</p>
+        <div class="footer-actions">
+          <a href="mailto:nithesh.23au@kct.ac.in" class="btn btn-primary" onclick="triggerRedirect(event, 'mailto:nithesh.23au@kct.ac.in', 'Email Client', false)">nithesh.23au@kct.ac.in</a>
+          <a href="https://www.linkedin.com/in/nithesh-ramesh-8434a2290" target="_blank" class="btn btn-secondary" onclick="triggerRedirect(event, 'https://www.linkedin.com/in/nithesh-ramesh-8434a2290', 'LinkedIn Profile', true)">LinkedIn Profile ↗</a>
+        </div>
+      </div>
+
+      <!-- Thirukkural Section -->
+      <div class="footer-quote">
+        <p class="tamil-text">"எண்ணிய எண்ணியாங்கு எய்துப எண்ணியார்<br>திண்ணியர் ஆகப் பெறின்."</p>
+        <span class="quote-meta">— திருக்குறள் 666 (Thirukkural 666)</span>
+      </div>
+
+      <div class="footer-bottom">
+        <span class="mono-label">© Nithesh Ramesh — Coimbatore, India</span>
+        <a href="Nithesh_Ramesh_Robotics_Design_Resume.docx" download class="footer-link" onclick="triggerResumeDownload(event)">Download Resume (.DOCX)</a>
+      </div>
     </div>
   </footer>
 
-  <!-- ============================================== -->
-  <!-- PROJECT OVERLAY MODALS                         -->
-  <!-- ============================================== -->
+  <!-- ==================== DEDICATED PROJECT CASE OVERLAYS ==================== -->
 
-  <!-- Modal 1: Robocon 2025 -->
-  <div class="project-overlay" id="modal-robocon-2025">
+  <!-- 1. ROBOCON 2025 MODAL -->
+  <div class="project-overlay" id="project-robocon2025">
     <div class="overlay-content">
-      <button class="close-btn">✕ Close</button>
-      <div class="overlay-visual-col">
-        <div class="overlay-image-banner"><img src="images/robocon25-main.jpg" class="overlay-image" alt="Main"></div>
-        <div class="cad-gallery-grid">
-          <div class="cad-gallery-thumb"><img src="images/robocon25-cad1.jpg" alt="CAD 1"></div>
-          <div class="cad-gallery-thumb"><img src="images/robocon25-cad2.jpg" alt="CAD 2"></div>
+      <button class="close-btn" onclick="closeProjectView()">✕ Close View</button>
+      
+      <div class="overlay-scroll-body">
+        <div class="overlay-header-group">
+          <span class="card-tag">ABU ROBOCON 2025</span>
+          <h1 class="overlay-title">Robocon 2025: Dual Vision-Guided Basketball Robots</h1>
+          <div class="overlay-meta-bar">
+            <span><strong>Role:</strong> Mechanical Designer</span> • 
+            <span><strong>Team Size:</strong> 24 Members</span> • 
+            <span><strong>Tools:</strong> Fusion 360, AutoCAD, MATLAB & Simulink, 3D Printers, Laser/Waterjet</span>
+          </div>
         </div>
-      </div>
-      <div class="overlay-details-col">
-        <span class="mono-label">CASE STUDY</span>
-        <h2 class="overlay-title">Robocon 2025</h2>
-        <p class="overlay-subtitle">[ Add your short subtitle/summary here ]</p>
+
         <div class="overlay-section">
-          <h3>Overview</h3>
-          <p>[ Write about your role and what the robot does here ]</p>
+          <h2>Project Overview</h2>
+          <p>Engineered a tactical dual-robot system designed to automate basketball passing and shooting operations under strict competition size and weight limits. The system combined a high-speed agile feeder robot with a heavy-duty precision shooter robot to achieve seamless court coverage and high-accuracy scoring.</p>
         </div>
+
+        <div class="overlay-media-grid">
+          <div class="media-box full-width">
+            <img src="robocon2025-dual-bots.png" alt="Robocon 2025 Dual Bots" class="overlay-img" />
+            <span class="media-caption">Full arena view of both 2025 basketball robots on court</span>
+          </div>
+          <div class="media-box">
+            <img src="robocon2025-cad-assembly.png" alt="Robocon 2025 CAD" class="overlay-img" />
+            <span class="media-caption">Overall CAD assembly view of the robotic systems</span>
+          </div>
+          <div class="media-box">
+            <video controls class="overlay-video" poster="robocon2025-dual-bots.png">
+              <source src="robocon2025-prototype-testing.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <span class="media-caption">🎥 Real-world prototype testing and agility demonstration</span>
+          </div>
+          <div class="media-box">
+            <img src="robocon2025-3wheel-feeder.png" alt="3-Wheel Feeder Bot" class="overlay-img" />
+            <span class="media-caption">3-Wheel omnidirectional agile feeder robot</span>
+          </div>
+          <div class="media-box">
+            <img src="robocon2025-4wheel-shooter.png" alt="4-Wheel Shooter Bot" class="overlay-img" />
+            <span class="media-caption">4-Wheel holonomic precision turret shooter robot</span>
+          </div>
+        </div>
+
         <div class="overlay-section">
-          <h3>Key Design Details</h3>
-          <p><strong>Detail 1:</strong> [ Explain a mechanism ]<br><br>
-          <strong>Detail 2:</strong> [ Explain manufacturing ]</p>
+          <h2>Dual-Chassis Strategy & Structural Engineering</h2>
+          <h3>1. 3-Wheel Omnidirectional Chassis (High-Speed Feeder Bot)</h3>
+          <ul>
+            <li><strong>Design Intent:</strong> Optimized specifically for rapid court transit, dodging opponent interference, and fast basketball retrieval.</li>
+            <li><strong>Drive System:</strong> 3-wheel omni-drive setup providing 360° agility and rapid directional switching without rotating the chassis body.</li>
+          </ul>
+
+          <h3>2. 4-Wheel Holonomic Chassis (High-Precision Shooter Bot)</h3>
+          <ul>
+            <li><strong>Design Intent:</strong> Engineered for absolute ground stability and precise positional holding while executing automated shots.</li>
+            <li><strong>Chassis Architecture:</strong> Reinforced aluminum box-frame chassis designed to absorb motor recoil during flywheel acceleration.</li>
+            <li><strong>Drive System:</strong> 4-wheel holonomic setup for micro-adjustments and exact alignment with the hoop target using vision feedback.</li>
+          </ul>
+        </div>
+
+        <div class="overlay-media-grid">
+          <div class="media-box">
+            <img src="robocon2025-turret-shooter.png" alt="Turret Shooter Mechanism" class="overlay-img" />
+            <span class="media-caption">360° dual-flywheel turret shooter assembly</span>
+          </div>
+          <div class="media-box">
+            <img src="robocon2025-carbon-extension.png" alt="Carbon Fiber Extension" class="overlay-img" />
+            <span class="media-caption">Lightweight carbon fiber feeder extension arm</span>
+          </div>
+        </div>
+
+        <div class="overlay-section">
+          <h2>Sub-System Mechanics & Material Selection</h2>
+          <h3>1. Turret Shooter Mechanism</h3>
+          <p>Driven by dual Neo brushless motors, mathematically tuned in MATLAB & Simulink to deliver maximum kinetic energy transfer to the basketball without slipping. Mounted on precision ball bearings for smooth 360° pan/tilt aiming.</p>
+
+          <h3>2. Carbon Fiber Extension System</h3>
+          <p>Utilized lightweight carbon fiber tubes and laminates for the ball-feeding extension arm. Carbon fiber drastically reduced cantilever mass, preventing structural sagging and keeping the center of gravity low during high-speed maneuvers.</p>
+
+          <h3>3. Material Framework & DFM</h3>
+          <ul>
+            <li><strong>Chassis & Structural Frame:</strong> Laser-cut aluminum boxes and structural aluminum bars for a strong, custom-fabricated base.</li>
+            <li><strong>High-Stress Joints & Extensions:</strong> Carbon Fiber Composites for maximum stiffness-to-weight ratio.</li>
+            <li><strong>Mounting Brackets & Gears:</strong> 3D Printed PETG / PLA for rapid iteration and complex geometries.</li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Modal 2: Robocon 2026 -->
-  <div class="project-overlay" id="modal-robocon-2026">
+
+  <!-- 2. ROBOCON 2026 MODAL -->
+  <div class="project-overlay" id="project-robocon2026">
     <div class="overlay-content">
-      <button class="close-btn">✕ Close</button>
-      <div class="overlay-visual-col">
-        <div class="overlay-image-banner"><img src="images/robocon26-main.jpg" class="overlay-image" alt="Main"></div>
-        <div class="cad-gallery-grid">
-          <div class="cad-gallery-thumb"><img src="images/robocon26-cad1.jpg" alt="CAD 1"></div>
-          <div class="cad-gallery-thumb"><img src="images/robocon26-cad2.jpg" alt="CAD 2"></div>
+      <button class="close-btn" onclick="closeProjectView()">✕ Close View</button>
+      
+      <div class="overlay-scroll-body">
+        <div class="overlay-header-group">
+          <span class="card-tag">ABU ROBOCON 2026</span>
+          <h1 class="overlay-title">Robocon 2026: Dual Autonomous & Manual XO-Playing Robots</h1>
+          <div class="overlay-meta-bar">
+            <span><strong>Role:</strong> Mechanical Design Lead</span> • 
+            <span><strong>Team Size:</strong> 24 Members</span> • 
+            <span><strong>Tools:</strong> Fusion 360, AutoCAD, MATLAB & Simulink, 3D Printers, Waterjet/Laser</span>
+          </div>
         </div>
-      </div>
-      <div class="overlay-details-col">
-        <span class="mono-label">CASE STUDY</span>
-        <h2 class="overlay-title">Robocon 2026</h2>
-        <p class="overlay-subtitle">[ Add your short subtitle/summary here ]</p>
+
         <div class="overlay-section">
-          <h3>Overview</h3>
-          <p>[ Write about your role and what the robot does here ]</p>
+          <h2>Project Overview</h2>
+          <p>Engineered a coordinated dual-robot system—featuring one manual 4-wheel robot and one fully autonomous tracked robot. The system was designed to navigate a complex obstacle course, retrieve payload boxes, and accurately deposit them into a vertical rack matrix to execute strategic Tic-Tac-Toe (XO) game plays.</p>
+        </div>
+
+        <div class="overlay-media-grid">
+          <div class="media-box full-width">
+            <img src="robocon2026-dual-system.png" alt="Robocon 2026 System" class="overlay-img" />
+            <span class="media-caption">Dual system showcase: Manual 4-Wheel platform & Autonomous Tracked robot</span>
+          </div>
+          <div class="media-box">
+            <img src="robocon2026-autonomous-cad.png" alt="Autonomous CAD" class="overlay-img" />
+            <span class="media-caption">Fusion 360 CAD view: Autonomous tracked robot</span>
+          </div>
+          <div class="media-box">
+            <img src="robocon2026-manual-cad.png" alt="Manual CAD" class="overlay-img" />
+            <span class="media-caption">Fusion 360 CAD view: Manual 4-wheel robot</span>
+          </div>
+          <div class="media-box">
+            <img src="robocon2026-autonomous-tracked.png" alt="Autonomous Tracked Robot" class="overlay-img" />
+            <span class="media-caption">Autonomous tracked robot with Panzer-style TPU treads</span>
+          </div>
+          <div class="media-box">
+            <img src="robocon2026-manual-4wheel.png" alt="Manual 4-Wheel Robot" class="overlay-img" />
+            <span class="media-caption">Manual 4-wheel mobile support platform</span>
+          </div>
+        </div>
+
+        <div class="overlay-media-grid">
+          <div class="media-box full-width">
+            <iframe src="https://drive.google.com/file/d/1VcSyVgkPiX7-yo4k1EuNGwIHd7qqrFd6/preview" style="width: 100%; height: 380px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08); display: block; background: #000;" allow="autoplay" allowfullscreen></iframe>
+            <span class="media-caption">🎥 Mechanical demonstration: PETG drive wheel & custom TPU track shoe assembly in motion</span>
+          </div>
+        </div>
+
+        <div class="overlay-section">
+          <h2>Dual-Robot Strategy & Locomotion Mechanics</h2>
+          <h3>1. Manual 4-Wheel Robot</h3>
+          <p>A highly agile, human-controlled 4-wheel mobile platform designed for rapid court navigation and tactical gameplay assistance.</p>
+
+          <h3>2. Autonomous Tracked Robot (Panzer-Style Drive)</h3>
+          <ul>
+            <li><strong>Engineering Objective:</strong> Designed a heavy-duty continuous track drive from scratch to guarantee high ground traction and structural predictability across rugged terrain obstacles.</li>
+            <li><strong>Drive & Driven Wheels:</strong> 3D-printed using rigid <strong>PETG</strong> to withstand continuous high-torque motor output without gear tooth shearing.</li>
+            <li><strong>Custom Track Shoes:</strong> 3D-printed using flexible <strong>TPU (Thermoplastic Polyurethane)</strong> to deliver exceptional high friction, shock absorption, and vibration control across uneven surfaces.</li>
+          </ul>
+        </div>
+
+        <div class="overlay-media-grid">
+          <div class="media-box full-width">
+            <video controls class="overlay-video" poster="robocon2026-dual-system.png">
+              <source src="robocon2026-track-test.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <span class="media-caption">🎥 Real-world track drive test: TPU shoes & PETG drive wheels navigating obstacles</span>
+          </div>
+        </div>
+
+        <div class="overlay-media-grid">
+          <div class="media-box">
+            <img src="robocon2026-3axis-arm.png" alt="3-Axis Manipulator Arm" class="overlay-img" />
+            <span class="media-caption">Custom 3-axis box manipulator arm assembly</span>
+          </div>
+          <div class="media-box">
+            <img src="robocon2026-sensor-stack.png" alt="Sensor Stack Integration" class="overlay-img" />
+            <span class="media-caption">Vibration-isolated Jetson, ZED camera, and flight controller packaging</span>
+          </div>
+        </div>
+
+        <div class="overlay-section">
+          <h2>Sub-System Mechanics & Materials</h2>
+          <h3>1. High-Precision Box Manipulator</h3>
+          <p>Engineered a custom 3-axis robotic arm specifically optimized for picking modular game boxes and inserting them into tight-tolerance vertical matrix slots with minimized joint play.</p>
+
+          <h3>2. Material Framework & DFM</h3>
+          <ul>
+            <li><strong>Primary Frame:</strong> <strong>Hot-Foamed Aluminum 6061</strong> utilized for the main chassis, providing an exceptional strength-to-weight ratio and a highly resilient foundation.</li>
+            <li><strong>High-Load Brackets:</strong> Custom Carbon Fiber laminates at high-stress joint interfaces.</li>
+            <li><strong>Electronics Baseplates:</strong> Laser-cut acrylic plates to isolate microcontrollers and neatly route harness wiring.</li>
+          </ul>
+
+          <h3>3. Vibration-Isolated Sensor Stack</h3>
+          <p>Custom mounting enclosures for a Jetson AGX Xavier, ZED Depth Cameras, Cube Orange Flight Controller (on dampeners), and perimeter IR sensors for zero-latency obstacle detection.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Modal 3: 6 DOF Robotic Arm -->
-  <div class="project-overlay" id="modal-arm">
+
+  <!-- 3. 6-DOF ROBOTIC ARM MODAL -->
+  <div class="project-overlay" id="project-6dof">
     <div class="overlay-content">
-      <button class="close-btn">✕ Close</button>
-      <div class="overlay-visual-col">
-        <div class="overlay-image-banner"><img src="images/arm-main.jpg" class="overlay-image" alt="Main"></div>
-      </div>
-      <div class="overlay-details-col">
-        <span class="mono-label">CASE STUDY</span>
-        <h2 class="overlay-title">6-DOF Robotic Arm</h2>
-        <p class="overlay-subtitle">[ Add your short subtitle/summary here ]</p>
+      <button class="close-btn" onclick="closeProjectView()">✕ Close View</button>
+      
+      <div class="overlay-scroll-body">
+        <div class="overlay-header-group">
+          <span class="card-tag">INDUSTRIAL AUTOMATION</span>
+          <h1 class="overlay-title">6-DOF Robotic Arm: Automated Industrial Spraying System</h1>
+          <div class="overlay-meta-bar">
+            <span><strong>Role:</strong> Robotics Design Engineer</span> • 
+            <span><strong>Tools:</strong> Fusion 360, CAD Workspace Reachability Analysis, Prototyping</span>
+          </div>
+        </div>
+
         <div class="overlay-section">
-          <h3>Overview</h3>
-          <p>[ Write about your role and what the robot does here ]</p>
+          <h2>Project Overview</h2>
+          <p>Prototyped a 6-axis articulated robotic arm designed to fully automate adhesive and paint spraying in shoe manufacturing. The system was engineered to eliminate manual application inconsistencies, reduce material waste, and protect factory workers from hazardous chemical fumes.</p>
+        </div>
+
+        <div class="overlay-media-grid">
+          <div class="media-box">
+            <img src="6dof-hero-render.png" alt="6-DOF Arm Hero" class="overlay-img" />
+            <span class="media-caption">6-axis articulated arm full CAD assembly</span>
+          </div>
+          <div class="media-box">
+            <img src="6dof-reach-analysis.png" alt="Workspace Reachability Analysis" class="overlay-img" />
+            <span class="media-caption">CAD workspace reachability study & singularity-free boundary map</span>
+          </div>
+        </div>
+
+        <div class="overlay-media-grid">
+          <div class="media-box full-width">
+            <video controls class="overlay-video" poster="6dof-hero-render.png">
+              <source src="6dof-footwear-spraying-prototype.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <span class="media-caption">🎥 Prototype video: Automated adhesive & paint spraying trajectory for footwear manufacturing</span>
+          </div>
+        </div>
+
+        <div class="overlay-section">
+          <h2>Engineering Breakdown</h2>
+          
+          <h3>1. Manipulator Architecture</h3>
+          <p>Modeled a custom 6-axis articulated arm geometry in Fusion 360, specifically engineered to replicate the complex articulation and agility of a human wrist and arm during a continuous spraying motion.</p>
+
+          <h3>2. Workspace & Reach Analysis</h3>
+          <p>Conducted comprehensive physical reachability studies within the CAD environment to ensure the end-effector could seamlessly cover the entire complex surface area of various shoe sizes and geometries without encountering mechanical singularities (kinematic dead-zones).</p>
+
+          <h3>3. Industrial Scale-Up & Deployment</h3>
+          <p>Currently transitioning the functional prototype into the main factory deployment phase, optimizing structural components and enclosures for heavy-duty factory floor durability, strict dust-proofing, and long-term chemical resistance against adhesives and paint.</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Modal 4: BB8 Inspired Bot -->
-  <div class="project-overlay" id="modal-bb8">
+
+  <!-- 4. BB8 INSPIRED BOT MODAL -->
+  <div class="project-overlay" id="project-bb8">
     <div class="overlay-content">
-      <button class="close-btn">✕ Close</button>
-      <div class="overlay-visual-col">
-        <div class="overlay-image-banner"><img src="images/bb8-main.jpg" class="overlay-image" alt="Main"></div>
-      </div>
-      <div class="overlay-details-col">
-        <span class="mono-label">CASE STUDY</span>
-        <h2 class="overlay-title">BB8 Inspired Bot</h2>
-        <p class="overlay-subtitle">[ Add your short subtitle/summary here ]</p>
+      <button class="close-btn" onclick="closeProjectView()">✕ Close View</button>
+      
+      <div class="overlay-scroll-body">
+        <div class="overlay-header-group">
+          <span class="card-tag">ENTERPRISE PROTOTYPING</span>
+          <h1 class="overlay-title">BB8 Inspired Bot: Customized Interactive Robot</h1>
+          <div class="overlay-meta-bar">
+            <span><strong>Role:</strong> Mechanical Designer</span> • 
+            <span><strong>Tools:</strong> Fusion 360, 3D Printing (Bambu Lab & Creality), PLA & PETG Optimization</span>
+          </div>
+        </div>
+
         <div class="overlay-section">
-          <h3>Overview</h3>
-          <p>[ Write about your role and what the robot does here ]</p>
+          <h2>Project Overview</h2>
+          <p>Designed and prototyped a fully customized, 3D-printed BB-8 inspired robot from scratch for an enterprise office project. The primary challenge was engineering a functional, interactive droid that integrated reliable locomotion with custom mechanical features—including payload delivery and audio systems—all optimized for large-scale 3D printing.</p>
+        </div>
+
+        <div class="overlay-media-grid">
+          <div class="media-box full-width hero-media-large">
+            <img src="bb8-hero.png" alt="BB8 Bot Hero" class="overlay-img hero-img-large" />
+            <span class="media-caption">Fully assembled 3D printed interactive BB8 droid prototype</span>
+          </div>
+        </div>
+
+        <div class="overlay-media-grid">
+          <div class="media-box full-width">
+            <video controls class="overlay-video" poster="bb8-hero.png">
+              <source src="bb8-prototype-test.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <span class="media-caption">🎥 BB8 prototype testing: Waffle Pi base navigation & motorized belly drawer operation</span>
+          </div>
+        </div>
+
+        <div class="overlay-section">
+          <h2>Locomotion & Interactive Mechanics</h2>
+          
+          <h3>1. Customized Waffle Pi Locomotion</h3>
+          <p>Replaced traditional spherical rolling mechanics with a customized <strong>TurtleBot3 Waffle Pi</strong> base at the bottom of the robot. This provided a highly reliable, programmable mobility platform for precise navigation across office environments.</p>
+
+          <h3>2. Automated Belly Drawer</h3>
+          <p>Engineered a custom, motorized "open-and-close" drawer mechanism seamlessly integrated directly into the spherical belly, allowing the droid to securely carry and deliver items.</p>
+
+          <h3>3. Head Speaker Integration</h3>
+          <p>Modified the internal structure of the head assembly to securely house a functional speaker system, enabling interactive audio feedback while maintaining the iconic BB-8 aesthetic.</p>
+
+          <h2>Additive Manufacturing Optimization (DFM)</h2>
+          <p>Provided specialized slicing parameters (optimal layer heights, wall line counts, and infill percentages) tailored for rigid PLA and PETG filaments to maximize impact resistance while minimizing total print time.</p>
+        </div>
+
+        <div class="overlay-media-grid">
+          <div class="media-box">
+            <img src="bb8-waffle-pi-base.png" alt="Waffle Pi Base CAD" class="overlay-img" />
+            <span class="media-caption">Internal CAD integration with Waffle Pi base</span>
+          </div>
+          <div class="media-box">
+            <img src="bb8-belly-drawer.png" alt="Belly Drawer Mechanism" class="overlay-img" />
+            <span class="media-caption">Motorized belly drawer assembly view</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- NEW LIGHTBOX MODAL -->
+  <div id="lightbox-modal" class="lightbox-modal" onclick="closeLightbox(event)">
+    <span class="lightbox-close" onclick="closeLightbox(event)">✕</span>
+    <div class="lightbox-content-wrapper">
+      <!-- Image/Video gets injected here via Javascript -->
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
