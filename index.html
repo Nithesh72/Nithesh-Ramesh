@@ -76,7 +76,7 @@
         <span class="mono-label">Automobile & Robotics Engineering — KCT</span>
       </div>
 
-      <h1 class="hero-title fade-up">
+      <h1 class="hero-title fade-up scramble-text" data-text="Designing mechanical hardware for robotics systems.">
         Designing mechanical hardware for robotics systems.
       </h1>
 
@@ -111,7 +111,7 @@
       <div class="about-grid">
         <div class="about-text-column">
           <div class="about-text fade-up">
-            <h2>I build reliable hardware with practical manufacturing in mind.</h2>
+            <h2 class="scramble-text" data-text="I build reliable hardware with practical manufacturing in mind.">I build reliable hardware with practical manufacturing in mind.</h2>
             <p>I am an Automobile Engineering student at Kumaraguru College of Technology. My work focuses on designing mechanical parts, complex mechanism design, and testing autonomous hardware.</p>
           </div>
           
@@ -144,14 +144,14 @@
     <div class="container">
       <div class="section-header fade-up">
         <span class="mono-label">02 / PROJECT SHOWCASE</span>
-        <h2>Engineering Projects</h2>
+        <h2 class="scramble-text" data-text="Engineering Projects">Engineering Projects</h2>
         <p class="section-subtext">Click any project to open its dedicated view and full technical details.</p>
       </div>
 
       <div class="projects-grid">
         <div class="linear-card project-card fade-up" onclick="openProjectView('project-robocon2025')">
           <div class="card-image-wrapper">
-            <img src="robocon2025-dual-bots.png" alt="Robocon 2025" class="card-image" />
+            <img src="IMG-20250417-WA0014.jpg" alt="Robocon 2025" class="card-image" />
             <div class="image-overlay-gradient"></div>
           </div>
           <div class="card-header">
@@ -166,7 +166,7 @@
 
         <div class="linear-card project-card fade-up" onclick="openProjectView('project-robocon2026')">
           <div class="card-image-wrapper">
-            <img src="robocon2026-dual-system.png" alt="Robocon 2026" class="card-image" />
+            <img src="rover-main.jpg" alt="Robocon 2026" class="card-image" />
             <div class="image-overlay-gradient"></div>
           </div>
           <div class="card-header">
@@ -218,7 +218,7 @@
     <div class="container">
       <div class="section-header fade-up">
         <span class="mono-label">03 / UPCOMING ENDEAVORS</span>
-        <h2>Future Projects</h2>
+        <h2 class="scramble-text" data-text="Future Projects">Future Projects</h2>
       </div>
       <div class="linear-card project-card fade-up">
         <div class="card-header">
@@ -320,7 +320,7 @@
   <footer class="footer fade-up">
     <div class="container">
       <div class="footer-box">
-        <h2>Ready to build reliable hardware?</h2>
+        <h2 class="scramble-text" data-text="Ready to build reliable hardware?">Ready to build reliable hardware?</h2>
         <p>I am available for robotics design roles, mechanical engineering positions, and technical projects.</p>
         <div class="footer-actions">
           <a href="mailto:nithesh.23au@kct.ac.in" class="btn btn-primary" onclick="triggerRedirect(event, 'mailto:nithesh.23au@kct.ac.in', 'Email Client', false)">nithesh.23au@kct.ac.in</a>
@@ -366,22 +366,22 @@
 
         <div class="overlay-media-grid">
           <div class="media-box full-width">
-            <img src="robocon2025-dual-bots.png" alt="Robocon 2025 Dual Bots" class="overlay-img" />
+            <img src="IMG-20250417-WA0014.jpg" alt="Robocon 2025 Dual Bots" class="overlay-img" />
             <span class="media-caption">Full arena view of both 2025 basketball robots on court</span>
           </div>
           <div class="media-box">
-            <img src="robocon2025-cad-assembly.png" alt="Robocon 2025 CAD" class="overlay-img" />
+            <img src="Screenshot 2026-06-20 142954.png" alt="Robocon 2025 CAD" class="overlay-img" />
             <span class="media-caption">Overall CAD assembly view of the robotic systems</span>
           </div>
           <div class="media-box">
-            <video controls class="overlay-video" poster="robocon2025-dual-bots.png">
+            <video controls class="overlay-video" poster="IMG-20250417-WA0014.jpg">
               <source src="robocon2025-prototype-testing.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
             <span class="media-caption">🎥 Real-world prototype testing and agility demonstration</span>
           </div>
           <div class="media-box">
-            <img src="robocon2025-3wheel-feeder.png" alt="3-Wheel Feeder Bot" class="overlay-img" />
+            <img src="IMG-20250417-WA0015.jpg" alt="3-Wheel Feeder Bot" class="overlay-img" />
             <span class="media-caption">3-Wheel omnidirectional agile feeder robot</span>
           </div>
           <div class="media-box">
@@ -483,7 +483,7 @@
 
         <div class="overlay-media-grid">
           <div class="media-box full-width">
-            <iframe src="https://drive.google.com/file/d/1VcSyVgkPiX7-yo4k1EuNGwIHd7qqrFd6/preview" style="width: 100%; height: 380px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.08); display: block; background: #000;" allow="autoplay" allowfullscreen></iframe>
+            <iframe src="https://drive.google.com/file/d/1VcSyVgkPiX7-yo4k1EuNGwIHd7qqrFd6/preview" class="overlay-video" style="border: none;" allow="autoplay" allowfullscreen></iframe>
             <span class="media-caption">🎥 Mechanical demonstration: PETG drive wheel & custom TPU track shoe assembly in motion</span>
           </div>
         </div>
@@ -503,7 +503,7 @@
 
         <div class="overlay-media-grid">
           <div class="media-box full-width">
-            <video controls class="overlay-video" poster="robocon2026-dual-system.png">
+            <video controls class="overlay-video" poster="rover-main.jpg">
               <source src="robocon2026-track-test.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -513,12 +513,20 @@
 
         <div class="overlay-media-grid">
           <div class="media-box">
-            <img src="robocon2026-3axis-arm.png" alt="3-Axis Manipulator Arm" class="overlay-img" />
+            <img src="arm-main.jpg" alt="3-Axis Manipulator Arm" class="overlay-img" />
             <span class="media-caption">Custom 3-axis box manipulator arm assembly</span>
           </div>
           <div class="media-box">
-            <img src="robocon2026-sensor-stack.png" alt="Sensor Stack Integration" class="overlay-img" />
+            <img src="docking_2026-Feb-12_04-27-58AM-000_CustomizedView7819102380_png.png" alt="Sensor Stack Integration" class="overlay-img" />
             <span class="media-caption">Vibration-isolated Jetson, ZED camera, and flight controller packaging</span>
+          </div>
+          <div class="media-box">
+            <img src="arm-cad-1.jpg" alt="Manipulator Arm CAD" class="overlay-img" />
+            <span class="media-caption">Manipulator Arm CAD Detail 1</span>
+          </div>
+          <div class="media-box">
+            <img src="arm-cad-2.jpg" alt="Manipulator Arm CAD 2" class="overlay-img" />
+            <span class="media-caption">Manipulator Arm CAD Detail 2</span>
           </div>
         </div>
 
@@ -580,6 +588,17 @@
               Your browser does not support the video tag.
             </video>
             <span class="media-caption">🎥 Prototype video: Automated adhesive & paint spraying trajectory for footwear manufacturing</span>
+          </div>
+        </div>
+
+        <div class="overlay-media-grid">
+          <div class="media-box">
+            <img src="6dof-spraying-prototype.png" alt="Spraying Prototype" class="overlay-img" />
+            <span class="media-caption">Physical prototype testing</span>
+          </div>
+          <div class="media-box">
+            <img src="6dof-factory-deployment.png" alt="Factory Deployment" class="overlay-img" />
+            <span class="media-caption">Factory floor integration setup</span>
           </div>
         </div>
 
