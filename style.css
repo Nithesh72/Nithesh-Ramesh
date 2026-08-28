@@ -173,7 +173,7 @@ body.cursor-hover .cursor-outline {
 .linear-card { position: relative; background: rgba(10, 10, 10, 0.6); border: 1px solid var(--border-subtle); border-radius: 32px; padding: 28px; transition: var(--transition); overflow: hidden; backdrop-filter: blur(10px); }
 .linear-card:hover { border-color: var(--border-highlight); box-shadow: 0 16px 40px rgba(0,0,0,0.7); }
 
-.card-image-wrapper { position: relative; width: 100%; height: 200px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border-subtle); }
+.card-image-wrapper { position: relative; width: 100%; height: 200px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border-subtle); z-index: 2; }
 .card-image-wrapper::after { content: ""; position: absolute; top: -100%; left: 0; width: 100%; height: 2px; background: rgba(255, 255, 255, 0.8); box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); transition: top 0.6s cubic-bezier(0.86, 0, 0.07, 1); z-index: 10; }
 .linear-card:hover .card-image-wrapper::after { top: 100%; }
 
@@ -211,6 +211,39 @@ body.cursor-hover .cursor-outline {
 .footer-quote { text-align: center; margin-bottom: 40px; padding: 32px; background: rgba(255, 255, 255, 0.01); border: 1px solid var(--border-subtle); border-radius: 20px; }
 .tamil-text { font-family: 'DM Sans', 'Noto Sans Tamil', sans-serif; font-size: 1.15rem; font-weight: 500; color: var(--text-primary); margin-bottom: 12px; line-height: 1.8; }
 .quote-meta { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); letter-spacing: 0.05em; text-transform: uppercase; }
+
+/* =========================================================
+   DYNAMIC SPOTLIGHT GLOW CLASSES
+========================================================= */
+.stat-card, .info-card, .linear-card, .footer-box, .btn-secondary {
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before, .info-card::before, .linear-card::before, .footer-box::before, .btn-secondary::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(
+    500px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+    rgba(255, 255, 255, 0.08),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.stat-card:hover::before, .info-card:hover::before, .linear-card:hover::before, .footer-box:hover::before, .btn-secondary:hover::before {
+  opacity: 1;
+}
+
+.stat-card > *, .info-card > *, .linear-card > *:not(.card-image-wrapper), .footer-box > *, .btn-secondary > * {
+  position: relative;
+  z-index: 1;
+}
+
 
 /* ==================== PROJECT OVERLAY MODALS ==================== */
 .project-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.92); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); z-index: 2000; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1); overflow-y: auto; padding: 40px 24px; display: flex; align-items: flex-start; justify-content: center; }
