@@ -69,86 +69,37 @@ if (!isMobileDevice) {
 }
 
 /* =========================================================
-   TEXT SCRAMBLE DECODE EFFECT (Fast & Smooth Version)
+   DYNAMIC SPOTLIGHT GLOW EFFECT (Cards & Buttons)
 ========================================================= */
-class TextScramble {
-  constructor(el) {
-    this.el = el;
-    this.chars = '!<>-_\\/[]{}—=+*^?#________';
-    this.update = this.update.bind(this);
-  }
+if (!isMobileDevice) {
+  const glowElements = document.querySelectorAll('.stat-card, .info-card, .linear-card, .footer-box, .btn-secondary');
   
-  setText(newText) {
-    const oldText = this.el.innerText;
-    const length = Math.max(oldText.length, newText.length);
-    const promise = new Promise((resolve) => this.resolve = resolve);
-    this.queue = [];
-    for (let i = 0; i < length; i++) {
-      const from = oldText[i] || '';
-      const to = newText[i] || '';
-      // Dramatically reduced timings for a lightning-fast snap effect
-      const start = Math.floor(Math.random() * 5);
-      const end = start + Math.floor(Math.random() * 15);
-      this.queue.push({ from, to, start, end, char: '' });
-    }
-    cancelAnimationFrame(this.frameRequest);
-    this.frame = 0;
-    this.update();
-    return promise;
-  }
-  
-  update() {
-    let output = '';
-    let complete = 0;
-    for (let i = 0, n = this.queue.length; i < n; i++) {
-      let { from, to, start, end, char } = this.queue[i];
-      if (this.frame >= end) {
-        complete++;
-        output += to;
-      } else if (this.frame >= start) {
-        // Increased update frequency to 60% for smoother letter cycling
-        if (!char || Math.random() < 0.60) {
-          char = this.randomChar();
-          this.queue[i].char = char;
-        }
-        output += `<span class="dud">${char}</span>`;
-      } else {
-        output += from;
-      }
-    }
-    this.el.innerHTML = output;
-    if (complete === this.queue.length) {
-      this.resolve();
-    } else {
-      this.frameRequest = requestAnimationFrame(this.update);
-      this.frame++;
-    }
-  }
-  
-  randomChar() {
-    return this.chars[Math.floor(Math.random() * this.chars.length)];
-  }
+  window.addEventListener('mousemove', (e) => {
+    glowElements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      el.style.setProperty('--mouse-x', `${x}px`);
+      el.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
 }
 
+/* =========================================================
+   SCROLL REVEAL (Clean Mechanical Snap)
+========================================================= */
 const fadeUpObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
-      
-      // Trigger fast scramble
-      if (entry.target.classList.contains('scramble-text') && !entry.target.classList.contains('scrambled')) {
-        const fx = new TextScramble(entry.target);
-        const originalText = entry.target.getAttribute('data-text');
-        fx.setText(originalText);
-        entry.target.classList.add('scrambled'); 
-      }
     } else {
       entry.target.classList.remove('visible');
     }
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-document.querySelectorAll('.fade-up, .scramble-text').forEach((el) => fadeUpObserver.observe(el));
+document.querySelectorAll('.fade-up').forEach((el) => fadeUpObserver.observe(el));
 
 /* =========================================================
    CAD BACKGROUND SWITCHER
@@ -203,7 +154,7 @@ function openLightbox(element) {
       e.preventDefault();
       const zoomSensitivity = 0.15;
       const delta = e.deltaY < 0 ? 1 : -1;
-      const newScale = Math.min(Math.max(1, lbScale + (delta * zoomSensitivity * lbScale)), 5);
+      const newScale = Math.min(Math.max(1, lbScale + (delta * zoomSensitivity * lbScale)), 5); 
 
       lbScale = newScale;
       if (lbScale === 1) {
